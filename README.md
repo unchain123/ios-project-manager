@@ -28,7 +28,7 @@
 
 | **[재재(ZZBAE)](https://github.com/ZZBAE)** | **[언체인(unchain)](https://github.com/unchain123)** |
 |:---:|:---:|
-|<img src=https://i.imgur.com/Xa9oBRA.png width=500, height=400>|<img src=https://i.imgur.com/bQpA64X.jpg width=400, height=400>|
+|<img src=https://i.imgur.com/Xa9oBRA.png width=300, height=300>|<img src=https://i.imgur.com/bQpA64X.jpg width=300, height=300>|
 
 <br>
 
