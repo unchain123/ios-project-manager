@@ -8,26 +8,27 @@
 import SwiftUI
 
 struct ProjectContentView: View {
+    @Environment(\.managedObjectContext) var viewContext
     @ObservedObject var viewModel: ProjectMainViewModel
-    @State private var selectedProject: Project?
+    @State private var selectedProject: ProjectViewModel?
     @State private var isPopover = false
 
-    var project: Project
+    var project: ProjectViewModel
     let today = Calendar.current.startOfDay(for: Date())
 
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(project.title ?? "")
+                Text(project.title)
                     .font(.title3.italic().bold())
                     .lineLimit(1)
-                Text(project.detail ?? "")
+                Text(project.detail)
                     .font(.body.monospacedDigit())
                     .foregroundColor(Color(.systemGray))
                     .lineLimit(3)
-                Text(project.date ?? Date(), formatter: Date.formatter)
+                Text(project.date, formatter: Date.formatter)
                     .font(.body.monospacedDigit())
-                    .foregroundColor(project.date! >= today ? .black : .red)
+                    .foregroundColor(project.date >= today ? .black : .red)
             }
             Spacer()
         }
@@ -40,7 +41,7 @@ struct ProjectContentView: View {
             viewModel.project = project
             isPopover = true
         })
-        .sheet(item: $selectedProject) { ProjectEditView(viewModel: ProjectModalViewModel(project: $0),
+        .sheet(item: $selectedProject) { _ in ProjectEditView(viewModel: ProjectModalViewModel(context: viewContext),
                                                          projects: $viewModel.model,
                                                          selectedProject: $selectedProject
         )}
@@ -54,7 +55,7 @@ struct ProjectContentView: View {
 
     struct PopoverButtonView: View {
         @ObservedObject var viewModel: ProjectMainViewModel
-        @Binding var selectedProject: Project?
+        @Binding var selectedProject: ProjectViewModel?
         @Binding var isPopover: Bool
 
         var destinationCandidates: [Status] {
@@ -67,9 +68,8 @@ struct ProjectContentView: View {
                     isPopover = false
                     viewModel.model = viewModel.model.map({ project in
                         guard project.id == viewModel.project?.id else { return project }
-                        var changedProject = project
-                        changedProject.status = status
-                        return changedProject
+                        viewModel.changeStatus(changeStatus: status)
+                        return project
                     })
                 })
                 .frame(width: 150, height: 30, alignment: .center)

@@ -12,11 +12,13 @@
 		7E967C0728C9D41200970577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E967C0628C9D41200970577 /* Assets.xcassets */; };
 		7E967C0A28C9D41200970577 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E967C0928C9D41200970577 /* Preview Assets.xcassets */; };
 		7E967C0C28C9D41200970577 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E967C0B28C9D41200970577 /* Persistence.swift */; };
-		7E967C0F28C9D41200970577 /* ProjectManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E967C0D28C9D41200970577 /* ProjectManager.xcdatamodeld */; };
+		7E967C0F28C9D41200970577 /* ProjectEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E967C0D28C9D41200970577 /* ProjectEntity.xcdatamodeld */; };
 		7E967C1928C9D41200970577 /* ProjectManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E967C1828C9D41200970577 /* ProjectManagerTests.swift */; };
 		7EF8466A28CF1EC0001475E1 /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8466928CF1EC0001475E1 /* ProjectEditView.swift */; };
 		7EF8469C28D05AAA001475E1 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8469B28D05AAA001475E1 /* Project.swift */; };
 		7EF846A128D06C2C001475E1 /* ProjectMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF846A028D06C2B001475E1 /* ProjectMainViewModel.swift */; };
+		8F699C4028E4706400A53CE7 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F699C3F28E4706300A53CE7 /* BaseModel.swift */; };
+		8F699C4428E470FC00A53CE7 /* ProjectEntity+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F699C4328E470FC00A53CE7 /* ProjectEntity+extension.swift */; };
 		8F75271828DD534100D6233A /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F75271728DD534100D6233A /* Date + extension.swift */; };
 		8FBFB27F28CF0A9000600C4B /* ProjectAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBFB27E28CF0A9000600C4B /* ProjectAddView.swift */; };
 		8FBFB2CB28D0AD3600600C4B /* ProjectModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBFB2CA28D0AD3600600C4B /* ProjectModalViewModel.swift */; };
@@ -54,6 +56,8 @@
 		7EF8466928CF1EC0001475E1 /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
 		7EF8469B28D05AAA001475E1 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7EF846A028D06C2B001475E1 /* ProjectMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMainViewModel.swift; sourceTree = "<group>"; };
+		8F699C3F28E4706300A53CE7 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		8F699C4328E470FC00A53CE7 /* ProjectEntity+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectEntity+extension.swift"; sourceTree = "<group>"; };
 		8F75271728DD534100D6233A /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
 		8FBFB27E28CF0A9000600C4B /* ProjectAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAddView.swift; sourceTree = "<group>"; };
 		8FBFB2CA28D0AD3600600C4B /* ProjectModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModalViewModel.swift; sourceTree = "<group>"; };
@@ -114,7 +118,7 @@
 				8FF5C92928DC5AC1007B3A7B /* SubView */,
 				7EF8469F28D06C11001475E1 /* ViewModel */,
 				7E967C0628C9D41200970577 /* Assets.xcassets */,
-				7E967C0D28C9D41200970577 /* ProjectManager.xcdatamodeld */,
+				7E967C0D28C9D41200970577 /* ProjectEntity.xcdatamodeld */,
 				7E967C0828C9D41200970577 /* Preview Content */,
 			);
 			path = ProjectManager;
@@ -150,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF8469B28D05AAA001475E1 /* Project.swift */,
-				8F75271728DD534100D6233A /* Date + extension.swift */,
+				8F699C3F28E4706300A53CE7 /* BaseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,8 +164,18 @@
 			children = (
 				7EF846A028D06C2B001475E1 /* ProjectMainViewModel.swift */,
 				8FBFB2CA28D0AD3600600C4B /* ProjectModalViewModel.swift */,
+				8F699C4128E470C700A53CE7 /* Extensions */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8F699C4128E470C700A53CE7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8F75271728DD534100D6233A /* Date + extension.swift */,
+				8F699C4328E470FC00A53CE7 /* ProjectEntity+extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8FF5C92928DC5AC1007B3A7B /* SubView */ = {
@@ -328,8 +342,10 @@
 				8FBFB2CB28D0AD3600600C4B /* ProjectModalViewModel.swift in Sources */,
 				7EF8469C28D05AAA001475E1 /* Project.swift in Sources */,
 				7E967C0C28C9D41200970577 /* Persistence.swift in Sources */,
-				7E967C0F28C9D41200970577 /* ProjectManager.xcdatamodeld in Sources */,
+				7E967C0F28C9D41200970577 /* ProjectEntity.xcdatamodeld in Sources */,
 				8FF5C92B28DC5AEF007B3A7B /* ProjectContentView.swift in Sources */,
+				8F699C4428E470FC00A53CE7 /* ProjectEntity+extension.swift in Sources */,
+				8F699C4028E4706400A53CE7 /* BaseModel.swift in Sources */,
 				7EF8466A28CF1EC0001475E1 /* ProjectEditView.swift in Sources */,
 				8FBFB27F28CF0A9000600C4B /* ProjectAddView.swift in Sources */,
 				7EF846A128D06C2C001475E1 /* ProjectMainViewModel.swift in Sources */,
@@ -653,13 +669,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7E967C0D28C9D41200970577 /* ProjectManager.xcdatamodeld */ = {
+		7E967C0D28C9D41200970577 /* ProjectEntity.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				7E967C0E28C9D41200970577 /* ProjectManager.xcdatamodel */,
 			);
 			currentVersion = 7E967C0E28C9D41200970577 /* ProjectManager.xcdatamodel */;
-			path = ProjectManager.xcdatamodeld;
+			path = ProjectEntity.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

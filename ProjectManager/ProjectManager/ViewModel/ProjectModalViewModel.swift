@@ -6,29 +6,45 @@
 //
 
 import SwiftUI
+import CoreData
 
 final class ProjectModalViewModel: ObservableObject {
-    var project: Project
+    var context: NSManagedObjectContext
 
-    @Published var title: String
-    @Published var detail: String
-    @Published var date: Date
-    @Published var id: UUID
-    @Published var status: Status
-    @Published var placeholder: String
+    @Published var title: String = ""
+    @Published var detail: String = ""
+    @Published var date: Date = Date()
+    @Published var id: UUID = UUID()
+    @Published var status: Status = .todo
     @Published var isEditable = true
 
-    init(project: Project = Project()) {
-        self.project = project
-        self.title = project.title ?? ""
-        self.detail = project.detail ?? ""
-        self.date = project.date ?? Date()
-        self.id = project.id ?? UUID()
-        self.status = project.status ?? .todo
-        self.placeholder = project.placeholder
+    init(context: NSManagedObjectContext) {
+        self.context = context
     }
 
     func isTappedEditButton() {
         isEditable = false
+    }
+
+    func save() {
+        do {
+            let project = ProjectEntity(context: context)
+            project.title = title
+            project.detail = detail
+            project.date = date
+            project.status = status.rawValue
+            project.id = id
+            try? project.save()
+        }
+    }
+    func update(projectId: NSManagedObjectID) {
+        do {
+            guard let project = try context.existingObject(with: projectId) as? ProjectEntity else {
+                return
+            }
+            try project.save()
+        } catch {
+            print(error)
+        }
     }
 }

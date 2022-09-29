@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ProjectMainView: View {
-    @StateObject var viewModel = ProjectMainViewModel()
+    @ObservedObject var viewModel: ProjectMainViewModel
+
+    init(viewContext: ProjectMainViewModel) {
+        self.viewModel = viewContext
+    }
 
     var body: some View {
         VStack(alignment: .center) {
@@ -23,6 +27,8 @@ struct ProjectMainView: View {
     }
 
     struct ProjectMainTitleView: View {
+        @Environment(\.managedObjectContext) var viewContext
+
         @ObservedObject var viewModel: ProjectMainViewModel
         @State private var showModal = false
 
@@ -46,7 +52,7 @@ struct ProjectMainView: View {
                         })
                     .foregroundColor(Color("ZEZEColor"))
                     .sheet(isPresented: self.$showModal, content: {
-                        ProjectAddView(viewModel: ProjectModalViewModel(project: Project()),
+                        ProjectAddView(viewModel: ProjectModalViewModel(context: viewContext),
                                        project: $viewModel.model,
                                        showModal: $showModal)
                     })
@@ -62,7 +68,7 @@ struct ProjectMainView: View {
 
         var title: String
         var status: Status
-        var distinguishProjects: [Project] {
+        var distinguishProjects: [ProjectViewModel] {
             switch status {
             case .todo:
                 return viewModel.todoArray
@@ -95,8 +101,8 @@ struct ProjectMainView: View {
                             .border(Color("BorderColor"), width: 3)
                             .cornerRadius(5)
                     }
-                    .onDelete { index in
-                        viewModel.delete(at: index, status: status)
+                    .onDelete { _ in
+                        viewModel.deleteProject(projectId: viewModel.project!.id)
                     }
                 }
                 .listStyle(.sidebar)

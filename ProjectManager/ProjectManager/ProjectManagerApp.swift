@@ -9,12 +9,11 @@ import SwiftUI
 
 @main
 struct ProjectManagerApp: App {
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
-            ProjectMainView(viewModel: ProjectMainViewModel())
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
+            ProjectMainView(viewContext: ProjectMainViewModel(context: viewContext))
+                .environment(\.managedObjectContext, viewContext)
         }
     }
 }

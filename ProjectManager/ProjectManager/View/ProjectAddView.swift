@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ProjectAddView: View {
     @ObservedObject var viewModel: ProjectModalViewModel
-    @Binding var project: [Project]
+    @Binding var project: [ProjectViewModel]
     @Binding var showModal: Bool
 
-    init(viewModel: ProjectModalViewModel, project: Binding<[Project]>, showModal: Binding<Bool>) {
+    init(viewModel: ProjectModalViewModel, project: Binding<[ProjectViewModel]>, showModal: Binding<Bool>) {
         self.viewModel = viewModel
         self._project = project
         self._showModal = showModal
@@ -29,7 +29,7 @@ struct ProjectAddView: View {
 
     struct ProjectAddTitleView: View {
         @ObservedObject var viewModel: ProjectModalViewModel
-        @Binding var projects: [Project]
+        @Binding var projects: [ProjectViewModel]
         @Binding var showModal: Bool
 
         var body: some View {
@@ -49,11 +49,7 @@ struct ProjectAddView: View {
                 Spacer()
                 Button(
                     action: {
-                        projects.append(Project(id: viewModel.id,
-                                                status: .todo,
-                                                title: viewModel.title,
-                                                detail: viewModel.detail,
-                                                date: viewModel.date))
+                        viewModel.save()
                         showModal = false
                     },
                     label: {
@@ -104,7 +100,7 @@ struct ProjectAddView: View {
                     .border(Color("BorderColor"), width: 3)
                     .overlay(alignment: .topLeading) {
                         if viewModel.detail.isEmpty {
-                            Text("\(viewModel.placeholder)")
+                            Text(NameSpace.placeHolder)
                                 .font(.body)
                         }
                     }
@@ -120,5 +116,6 @@ extension ProjectAddView {
         static let cancelButton = "CANCEL"
         static let doneButton = "DONE"
         static let titleSpaceHolder = "TITLE"
+        static let placeHolder = "내용을 입력하세요. (글자수는 1000자로 제한합니다)"
     }
 }
