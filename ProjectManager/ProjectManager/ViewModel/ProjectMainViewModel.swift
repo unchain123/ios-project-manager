@@ -47,13 +47,12 @@ final class ProjectMainViewModel: NSObject, ObservableObject {
         model.filter { $0.status.rawValue == Status.doing.rawValue  }
     }
 
-    func deleteProject(projectId: NSManagedObjectID) {
+    func deleteProject(indexSet: IndexSet) {
         do {
-            guard let project = try context.existingObject(with: projectId)
-                    as? ProjectEntity else {
-                return
-            }
-            try project.delete()
+            guard let index = indexSet.first else { return }
+            let selectedProjectID = model[index].project
+            context.delete(selectedProjectID)
+            try context.save()
         } catch {
             print(error)
         }
@@ -66,15 +65,15 @@ final class ProjectMainViewModel: NSObject, ObservableObject {
             try? project.save()
         }
     }
-    //    func delete(at offsets: IndexSet, status: Status) {
-    //        guard let remove = offsets.first else { return }
-    //        let filteredArray = model.filter { todo in
-    //            todo.status == status.rawValue
-    //        }
-    //        model.removeAll { todo in
-    //            todo.id == filteredArray[remove].id
-    //        }
-    //    }
+        func delete(at offsets: IndexSet, status: Status) {
+            guard let remove = offsets.first else { return }
+            let filteredArray = model.filter { todo in
+                todo.status.rawValue == status.rawValue
+            }
+            model.removeAll { todo in
+                todo.id == filteredArray[remove].id
+            }
+        }
 }
 
 extension ProjectMainViewModel: NSFetchedResultsControllerDelegate {
@@ -87,7 +86,7 @@ extension ProjectMainViewModel: NSFetchedResultsControllerDelegate {
 }
 
 struct ProjectViewModel: Identifiable, Hashable {
-    private var project: ProjectEntity
+    private (set) var project: ProjectEntity
 
     init(project: ProjectEntity) {
         self.project = project

@@ -41,7 +41,8 @@ struct ProjectContentView: View {
             viewModel.project = project
             isPopover = true
         })
-        .sheet(item: $selectedProject) { _ in ProjectEditView(viewModel: ProjectModalViewModel(context: viewContext),
+        .sheet(item: $selectedProject) { _ in
+            ProjectEditView(viewModel: ProjectModalViewModel(context: viewContext),
                                                          projects: $viewModel.model,
                                                          selectedProject: $selectedProject
         )}

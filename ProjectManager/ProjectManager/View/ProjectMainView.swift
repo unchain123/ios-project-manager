@@ -101,8 +101,8 @@ struct ProjectMainView: View {
                             .border(Color("BorderColor"), width: 3)
                             .cornerRadius(5)
                     }
-                    .onDelete { _ in
-                        viewModel.deleteProject(projectId: viewModel.project!.id)
+                    .onDelete { indexSet in
+                        viewModel.deleteProject(indexSet: indexSet)
                     }
                 }
                 .listStyle(.sidebar)
