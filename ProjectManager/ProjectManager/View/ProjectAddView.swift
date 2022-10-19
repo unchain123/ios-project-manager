@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ProjectAddView: View {
     @ObservedObject var viewModel: ProjectModalViewModel
-    @Binding var project: [Project]
+    @Binding var project: [ProjectEntity]
     @Binding var showModal: Bool
 
-    init(viewModel: ProjectModalViewModel, project: Binding<[Project]>, showModal: Binding<Bool>) {
+    init(viewModel: ProjectModalViewModel, project: Binding<[ProjectEntity]>, showModal: Binding<Bool>) {
         self.viewModel = viewModel
         self._project = project
         self._showModal = showModal
@@ -29,7 +29,7 @@ struct ProjectAddView: View {
 
     struct ProjectAddTitleView: View {
         @ObservedObject var viewModel: ProjectModalViewModel
-        @Binding var projects: [Project]
+        @Binding var projects: [ProjectEntity]
         @Binding var showModal: Bool
 
         var body: some View {
@@ -49,11 +49,11 @@ struct ProjectAddView: View {
                 Spacer()
                 Button(
                     action: {
-                        projects.append(Project(id: viewModel.id,
-                                                status: .todo,
-                                                title: viewModel.title,
-                                                detail: viewModel.detail,
-                                                date: viewModel.date))
+//                        projects.append(Project(id: viewModel.id,
+//                                                status: .todo,
+//                                                title: viewModel.title,
+//                                                detail: viewModel.detail,
+//                                                date: viewModel.date))
                         showModal = false
                     },
                     label: {
@@ -104,7 +104,7 @@ struct ProjectAddView: View {
                     .border(Color("BorderColor"), width: 3)
                     .overlay(alignment: .topLeading) {
                         if viewModel.detail.isEmpty {
-                            Text("\(viewModel.placeholder)")
+                            Text("내용을 입력하세요. (글자수는 1000자로 제한합니다)")
                                 .font(.body)
                         }
                     }

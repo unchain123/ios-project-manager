@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ProjectEditView: View {
     @ObservedObject var viewModel: ProjectModalViewModel
-    @Binding var projects: [Project]
-    @Binding var selectedProject: Project?
+    @Binding var projects: [ProjectEntity]
+    @Binding var selectedProject: ProjectEntity?
 
     var body: some View {
         VStack {
@@ -23,8 +23,8 @@ struct ProjectEditView: View {
 
     struct ProjectEditTitleView: View {
         @ObservedObject var viewModel: ProjectModalViewModel
-        @Binding var projects: [Project]
-        @Binding var selectedProject: Project?
+        @Binding var projects: [ProjectEntity]
+        @Binding var selectedProject: ProjectEntity?
 
         var body: some View {
             HStack {
@@ -43,15 +43,15 @@ struct ProjectEditView: View {
                 Spacer()
                 Button(
                     action: {
-                        projects = projects.map { project in
-                            guard project.id == viewModel.id else { return project }
-                            let changedProject = Project(id: viewModel.id,
-                                                         status: viewModel.status,
-                                                         title: viewModel.title,
-                                                         detail: viewModel.detail,
-                                                         date: viewModel.date)
-                            return changedProject
-                        }
+//                        projects = projects.map { project in
+//                            guard project.id == viewModel.id else { return project }
+//                            let changedProject = Project(id: viewModel.id,
+//                                                         status: viewModel.status,
+//                                                         title: viewModel.title,
+//                                                         detail: viewModel.detail,
+//                                                         date: viewModel.date)
+//                            return changedProject
+//                        }
                         selectedProject = nil
                     },
                     label: {

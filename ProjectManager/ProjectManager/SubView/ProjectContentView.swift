@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ProjectContentView: View {
     @ObservedObject var viewModel: ProjectMainViewModel
-    @State private var selectedProject: Project?
+    @State private var selectedProject: ProjectEntity?
     @State private var isPopover = false
 
-    var project: Project
+    var project: ProjectEntity
     let today = Calendar.current.startOfDay(for: Date())
 
     var body: some View {
@@ -54,11 +54,11 @@ struct ProjectContentView: View {
 
     struct PopoverButtonView: View {
         @ObservedObject var viewModel: ProjectMainViewModel
-        @Binding var selectedProject: Project?
+        @Binding var selectedProject: ProjectEntity?
         @Binding var isPopover: Bool
 
         var destinationCandidates: [Status] {
-            return Status.allCases.filter { $0 != viewModel.project?.status }
+            return Status.allCases.filter { $0.rawValue != viewModel.project?.status }
         }
 
         var body: some View {
@@ -68,7 +68,7 @@ struct ProjectContentView: View {
                     viewModel.model = viewModel.model.map({ project in
                         guard project.id == viewModel.project?.id else { return project }
                         var changedProject = project
-                        changedProject.status = status
+                        changedProject.status = status.rawValue
                         return changedProject
                     })
                 })

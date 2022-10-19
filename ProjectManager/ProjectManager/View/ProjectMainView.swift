@@ -46,7 +46,7 @@ struct ProjectMainView: View {
                         })
                     .foregroundColor(Color("ZEZEColor"))
                     .sheet(isPresented: self.$showModal, content: {
-                        ProjectAddView(viewModel: ProjectModalViewModel(project: Project()),
+                        ProjectAddView(viewModel: ProjectModalViewModel(project: ProjectEntity()),
                                        project: $viewModel.model,
                                        showModal: $showModal)
                     })
@@ -62,7 +62,7 @@ struct ProjectMainView: View {
 
         var title: String
         var status: Status
-        var distinguishProjects: [Project] {
+        var distinguishProjects: [ProjectEntity] {
             switch status {
             case .todo:
                 return viewModel.todoArray

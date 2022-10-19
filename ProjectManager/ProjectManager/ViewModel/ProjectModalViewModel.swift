@@ -8,24 +8,22 @@
 import SwiftUI
 
 final class ProjectModalViewModel: ObservableObject {
-    var project: Project
+    var project: ProjectEntity
 
     @Published var title: String
     @Published var detail: String
     @Published var date: Date
     @Published var id: UUID
-    @Published var status: Status
-    @Published var placeholder: String
+    @Published var status: String
     @Published var isEditable = true
 
-    init(project: Project = Project()) {
+    init(project: ProjectEntity = ProjectEntity()) {
         self.project = project
         self.title = project.title ?? ""
         self.detail = project.detail ?? ""
         self.date = project.date ?? Date()
         self.id = project.id ?? UUID()
-        self.status = project.status ?? .todo
-        self.placeholder = project.placeholder
+        self.status = project.status ?? Status.todo.rawValue
     }
 
     func isTappedEditButton() {
