@@ -37,11 +37,11 @@ struct ProjectContentView: View {
             selectedProject = project
         }
         .onLongPressGesture(minimumDuration: 1, perform: {
-            viewModel.project = project
+            viewModel.coreDataManager.project = project
             isPopover = true
         })
         .sheet(item: $selectedProject) { ProjectEditView(viewModel: ProjectModalViewModel(project: $0),
-                                                         projects: $viewModel.model,
+                                                         projects: $viewModel.coreDataManager.savedProjects,
                                                          selectedProject: $selectedProject
         )}
         .popover(isPresented: $isPopover) {
@@ -58,16 +58,16 @@ struct ProjectContentView: View {
         @Binding var isPopover: Bool
 
         var destinationCandidates: [Status] {
-            return Status.allCases.filter { $0.rawValue != viewModel.project?.status }
+            return Status.allCases.filter { $0.rawValue != viewModel.coreDataManager.project.status }
         }
 
         var body: some View {
             ForEach(destinationCandidates, id: \.self) { status in
                 Button("move to \(status.rawValue)", action: {
                     isPopover = false
-                    viewModel.model = viewModel.model.map({ project in
-                        guard project.id == viewModel.project?.id else { return project }
-                        var changedProject = project
+                    viewModel.coreDataManager.savedProjects = viewModel.coreDataManager.savedProjects.map({ project in
+                        guard project.id == viewModel.coreDataManager.project.id else { return project }
+                        let changedProject = project
                         changedProject.status = status.rawValue
                         return changedProject
                     })

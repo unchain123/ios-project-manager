@@ -49,11 +49,7 @@ struct ProjectAddView: View {
                 Spacer()
                 Button(
                     action: {
-//                        projects.append(Project(id: viewModel.id,
-//                                                status: .todo,
-//                                                title: viewModel.title,
-//                                                detail: viewModel.detail,
-//                                                date: viewModel.date))
+                        viewModel.coreDataManager.addProject(id: viewModel.id, title: viewModel.title, detail: viewModel.detail, date: viewModel.date, status: viewModel.status)
                         showModal = false
                     },
                     label: {

@@ -47,7 +47,7 @@ struct ProjectMainView: View {
                     .foregroundColor(Color("ZEZEColor"))
                     .sheet(isPresented: self.$showModal, content: {
                         ProjectAddView(viewModel: ProjectModalViewModel(project: ProjectEntity()),
-                                       project: $viewModel.model,
+                                       project: $viewModel.coreDataManager.savedProjects,
                                        showModal: $showModal)
                     })
                     .font(.title)
@@ -96,7 +96,7 @@ struct ProjectMainView: View {
                             .cornerRadius(5)
                     }
                     .onDelete { index in
-                        viewModel.delete(at: index, status: status)
+                        viewModel.coreDataManager.deleteProject(at: index, status: status)
                     }
                 }
                 .listStyle(.sidebar)
