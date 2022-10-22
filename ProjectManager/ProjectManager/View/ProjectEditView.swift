@@ -43,16 +43,13 @@ struct ProjectEditView: View {
                 Spacer()
                 Button(
                     action: {
+                        viewModel.coreDataManager.editProject(projects: projects,
+                                                              project: selectedProject ?? ProjectEntity(),
+                                                              title: viewModel.title,
+                                                              detail: viewModel.detail,
+                                                              date: viewModel.date,
+                                                              status: viewModel.status)
 
-//                        projects = projects.map { project in
-//                            guard project.id == viewModel.id else { return project }
-//                            let changedProject = Project(id: viewModel.id,
-//                                                         status: viewModel.status,
-//                                                         title: viewModel.title,
-//                                                         detail: viewModel.detail,
-//                                                         date: viewModel.date)
-//                            return changedProject
-//                        }
                         selectedProject = nil
                     },
                     label: {

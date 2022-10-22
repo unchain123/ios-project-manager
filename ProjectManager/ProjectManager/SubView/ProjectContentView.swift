@@ -47,14 +47,13 @@ struct ProjectContentView: View {
         .popover(isPresented: $isPopover) {
             VStack(alignment: .center) {
                 Divider()
-                PopoverButtonView(viewModel: viewModel, selectedProject: $selectedProject, isPopover: $isPopover)
+                PopoverButtonView(viewModel: viewModel, isPopover: $isPopover)
             }
         }
     }
 
     struct PopoverButtonView: View {
         @ObservedObject var viewModel: ProjectMainViewModel
-        @Binding var selectedProject: ProjectEntity?
         @Binding var isPopover: Bool
 
         var destinationCandidates: [Status] {
@@ -65,14 +64,10 @@ struct ProjectContentView: View {
             ForEach(destinationCandidates, id: \.self) { status in
                 Button("move to \(status.rawValue)", action: {
                     isPopover = false
-                    viewModel.coreDataManager.editProject(status: status.rawValue)
-
-//                    viewModel.coreDataManager.savedProjects = viewModel.coreDataManager.savedProjects.map({ project in
-//                        guard project.id == viewModel.coreDataManager.project.id else { return project }
-//                        let changedProject = project
-//                        changedProject.status = status.rawValue
-//                        return changedProject
-//                    })
+                    viewModel.coreDataManager.editToStatus(
+                        projects: viewModel.coreDataManager.savedProjects,
+                        project: viewModel.coreDataManager.project,
+                        status: status.rawValue)
                 })
                 .frame(width: 150, height: 30, alignment: .center)
                 .foregroundColor(Color("ZEZEColor"))

@@ -66,9 +66,39 @@ class CoreDataManager: ObservableObject {
         saveProject()
     }
 
-    func editProject(status: String) {
-        let edit = savedProjects.first
-        edit?.setValue(status, forKey: "status")
+    func editToStatus(projects: [ProjectEntity], project: ProjectEntity, status: String) {
+        projects.map { projectIndex in
+            guard projectIndex.id == project.id else { return project }
+            project.setValue(status, forKey: "status")
+            return projectIndex
+        }
+        saveProject()
+    }
+
+    func editProject(projects: [ProjectEntity],
+                     project: ProjectEntity,
+                     title: String,
+                     detail: String,
+                     date: Date,
+                     status: String
+                    ) {
+        projects.map { projectIndex in
+            guard projectIndex.id == project.id else { return project }
+            project.setValue(title, forKey: "title")
+            project.setValue(detail, forKey: "detail")
+            project.setValue(date, forKey: "date")
+            project.setValue(status, forKey: "status")
+            return projectIndex
+        }
         saveProject()
     }
 }
+//                        projects = projects.map { project in
+//                            guard project.id == viewModel.id else { return project }
+//                            let changedProject = Project(id: viewModel.id,
+//                                                         status: viewModel.status,
+//                                                         title: viewModel.title,
+//                                                         detail: viewModel.detail,
+//                                                         date: viewModel.date)
+//                            return changedProject
+//                        }
