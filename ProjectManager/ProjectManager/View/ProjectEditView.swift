@@ -43,6 +43,7 @@ struct ProjectEditView: View {
                 Spacer()
                 Button(
                     action: {
+
 //                        projects = projects.map { project in
 //                            guard project.id == viewModel.id else { return project }
 //                            let changedProject = Project(id: viewModel.id,

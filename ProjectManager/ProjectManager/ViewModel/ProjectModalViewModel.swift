@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 final class ProjectModalViewModel: ObservableObject {
-    var coreDataManager = CoreDataManager.shared
+    @Published var coreDataManager = CoreDataManager.shared
 
     var project: ProjectEntity
 
@@ -22,8 +22,11 @@ final class ProjectModalViewModel: ObservableObject {
 
     init(project: ProjectEntity = ProjectEntity(), id: UUID = UUID()) {
         self.project = project
-        self.id = id
-
+        self.id = project.id ?? UUID()
+        self.title = project.title ?? ""
+        self.detail = project.detail ?? ""
+        self.date = project.date ?? Date()
+        self.status = project.status ?? ""
     }
 
     func isTappedEditButton() {

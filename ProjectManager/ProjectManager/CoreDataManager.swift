@@ -65,4 +65,10 @@ class CoreDataManager: ObservableObject {
         newProject.status = status
         saveProject()
     }
+
+    func editProject(status: String) {
+        let edit = savedProjects.first
+        edit?.setValue(status, forKey: "status")
+        saveProject()
+    }
 }

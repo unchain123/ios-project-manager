@@ -6,19 +6,25 @@
 //
 import CoreData
 import SwiftUI
+import Combine
 
 final class ProjectMainViewModel: ObservableObject {
     var coreDataManager = CoreDataManager.shared
+    var store: AnyCancellable?
 
-    var todoArray: [ProjectEntity] {
-        coreDataManager.savedProjects.filter { $0.status == Status.todo.rawValue }
+    @Published var todoArray: [ProjectEntity] = []
+    @Published var doingArray: [ProjectEntity] = []
+    @Published var doneArray: [ProjectEntity] = []
+
+    func makeSink() {
+        store = coreDataManager.$savedProjects
+            .sink { saveProject in
+                self.todoArray = saveProject.filter { $0.status == Status.todo.rawValue }
+                self.doingArray = saveProject.filter { $0.status == Status.doing.rawValue }
+                self.doneArray = saveProject.filter { $0.status == Status.done.rawValue }
+        }
     }
-    var doingArray: [ProjectEntity] {
-        coreDataManager.savedProjects.filter { $0.status == Status.doing.rawValue }
-    }
-    var doneArray: [ProjectEntity] {
-        coreDataManager.savedProjects.filter { $0.status == Status.done.rawValue }
-    }
+
 
 //    func delete(at offsets: IndexSet, status: Status) {
 //        guard let remove = offsets.first else { return }

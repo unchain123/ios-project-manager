@@ -101,6 +101,9 @@ struct ProjectMainView: View {
                 }
                 .listStyle(.sidebar)
             }
+            .onAppear {
+                viewModel.makeSink()
+            }
             .background(Color("ZEZEColor"))
         }
     }

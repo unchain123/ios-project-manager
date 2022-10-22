@@ -27,7 +27,7 @@ struct ProjectContentView: View {
                     .lineLimit(3)
                 Text(project.date ?? Date(), formatter: Date.formatter)
                     .font(.body.monospacedDigit())
-                    .foregroundColor(project.date! >= today ? .black : .red)
+                    .foregroundColor(project.date ?? Date() >= today ? .black : .red)
             }
             Spacer()
         }
@@ -65,12 +65,14 @@ struct ProjectContentView: View {
             ForEach(destinationCandidates, id: \.self) { status in
                 Button("move to \(status.rawValue)", action: {
                     isPopover = false
-                    viewModel.coreDataManager.savedProjects = viewModel.coreDataManager.savedProjects.map({ project in
-                        guard project.id == viewModel.coreDataManager.project.id else { return project }
-                        let changedProject = project
-                        changedProject.status = status.rawValue
-                        return changedProject
-                    })
+                    viewModel.coreDataManager.editProject(status: status.rawValue)
+
+//                    viewModel.coreDataManager.savedProjects = viewModel.coreDataManager.savedProjects.map({ project in
+//                        guard project.id == viewModel.coreDataManager.project.id else { return project }
+//                        let changedProject = project
+//                        changedProject.status = status.rawValue
+//                        return changedProject
+//                    })
                 })
                 .frame(width: 150, height: 30, alignment: .center)
                 .foregroundColor(Color("ZEZEColor"))
