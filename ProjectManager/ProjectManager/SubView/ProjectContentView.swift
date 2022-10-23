@@ -40,7 +40,7 @@ struct ProjectContentView: View {
             viewModel.coreDataManager.project = project
             isPopover = true
         })
-        .sheet(item: $selectedProject) { ProjectEditView(viewModel: ProjectModalViewModel(project: $0),
+        .sheet(item: $selectedProject) { ProjectEditView(viewModel: ProjectModalViewModel(currentProject: $0),
                                                          projects: $viewModel.coreDataManager.savedProjects,
                                                          selectedProject: $selectedProject
         )}

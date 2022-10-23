@@ -46,7 +46,7 @@ struct ProjectMainView: View {
                         })
                     .foregroundColor(Color("ZEZEColor"))
                     .sheet(isPresented: self.$showModal, content: {
-                        ProjectAddView(viewModel: ProjectModalViewModel(project: ProjectEntity()),
+                        ProjectAddView(viewModel: ProjectModalViewModel(newProject: ProjectEntity()),
                                        project: $viewModel.coreDataManager.savedProjects,
                                        showModal: $showModal)
                     })

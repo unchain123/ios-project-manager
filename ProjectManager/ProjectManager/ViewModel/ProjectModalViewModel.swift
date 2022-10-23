@@ -20,13 +20,18 @@ final class ProjectModalViewModel: ObservableObject {
     @Published var status: String = Status.todo.rawValue
     @Published var isEditable = true
 
-    init(project: ProjectEntity = ProjectEntity(), id: UUID = UUID()) {
-        self.project = project
+    init(currentProject: ProjectEntity = ProjectEntity(), id: UUID = UUID()) {
+        self.project = currentProject
         self.id = project.id ?? UUID()
         self.title = project.title ?? ""
         self.detail = project.detail ?? ""
         self.date = project.date ?? Date()
         self.status = project.status ?? ""
+    }
+
+    init(newProject: ProjectEntity = ProjectEntity(), id: UUID = UUID()) {
+        self.project = newProject
+        self.id = id
     }
 
     func isTappedEditButton() {
