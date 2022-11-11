@@ -1,5 +1,5 @@
 # 💻 **프로젝트 매니저 (Project Manager)**
-> **프로젝트 기간** : 2022.09.05 월 ~ 2022.09.22 목 </br>**팀원** : [재재](https://github.com/ZZBAE), [언체인](https://github.com/unchain123)</br>**리뷰어** : [Ryan](https://github.com/ryan-son)
+> **프로젝트 기간** : 2022.09.05 월 ~ 2022.09.30  </br>**팀원** : [재재](https://github.com/ZZBAE), [언체인](https://github.com/unchain123)</br>**리뷰어** : [Ryan](https://github.com/ryan-son)
 
 <br>
 
