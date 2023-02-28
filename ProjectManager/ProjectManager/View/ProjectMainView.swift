@@ -45,15 +45,16 @@ struct ProjectMainView: View {
                             Image(systemName: NameSpace.plusButton)
                         })
                     .foregroundColor(Color("ZEZEColor"))
-                    .sheet(isPresented: self.$showModal, content: {
-                        ProjectAddView(viewModel: ProjectModalViewModel(newProject: ProjectEntity()),
-                                       project: $viewModel.coreDataManager.savedProjects,
-                                       showModal: $showModal)
-                    })
                     .font(.title)
                     .padding(10)
                 }
             }
+            .sheet(isPresented: self.$showModal, content: {
+                ProjectAddView(viewModel: ProjectModalViewModel(newProject: ProjectEntity()),
+                               project: $viewModel.coreDataManager.savedProjects,
+                               showModal: $showModal)
+                .font(.title)
+            })
         }
     }
 

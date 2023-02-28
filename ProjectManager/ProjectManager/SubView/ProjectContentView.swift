@@ -43,7 +43,9 @@ struct ProjectContentView: View {
         .sheet(item: $selectedProject) { ProjectEditView(viewModel: ProjectModalViewModel(currentProject: $0),
                                                          projects: $viewModel.coreDataManager.savedProjects,
                                                          selectedProject: $selectedProject
-        )}
+        )
+        .font(.title)
+        }
         .popover(isPresented: $isPopover) {
             VStack(alignment: .center) {
                 Divider()
